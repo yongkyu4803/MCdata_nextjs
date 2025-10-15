@@ -48,7 +48,7 @@ const guideSections: GuideSection[] = [
     title: '💹 가격 모멘텀',
     icon: <TrendingUp className="h-5 w-5" />,
     badge: '추세 분석',
-    badgeColor: 'bg-blue-500',
+    badgeColor: 'bg-purple-500',
     description: '곡별 가격 변동 추세를 분석하여 상승/하락 모멘텀이 강한 종목을 찾아냅니다.',
     metrics: [
       {
@@ -240,11 +240,11 @@ export function DashboardGuide() {
   };
 
   return (
-    <Card className="border-blue-200 bg-gradient-to-br from-blue-50 to-white">
+    <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="rounded-full bg-blue-500 p-2">
+            <div className="rounded-full bg-purple-500 p-2">
               <Info className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -256,7 +256,7 @@ export function DashboardGuide() {
           </div>
           <button
             onClick={toggleAll}
-            className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+            className="text-sm text-purple-600 hover:text-purple-800 font-medium"
           >
             {openSections.size === guideSections.length ? '모두 접기' : '모두 펼치기'}
           </button>
@@ -314,7 +314,7 @@ export function DashboardGuide() {
                   <ul className="space-y-1">
                     {section.interpretation.map((item, idx) => (
                       <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                        <span className="text-blue-500 mt-0.5">•</span>
+                        <span className="text-purple-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -322,9 +322,9 @@ export function DashboardGuide() {
                 </div>
 
                 {/* 활용 사례 */}
-                <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <h4 className="font-medium text-blue-900 mb-1 text-sm">🎯 이럴 때 활용하세요</h4>
-                  <p className="text-sm text-blue-800">{section.useCase}</p>
+                <div className="bg-purple-50 rounded-lg p-3 border border-purple-200">
+                  <h4 className="font-medium text-purple-900 mb-1 text-sm">🎯 이럴 때 활용하세요</h4>
+                  <p className="text-sm text-purple-800">{section.useCase}</p>
                 </div>
               </div>
             </CollapsibleContent>

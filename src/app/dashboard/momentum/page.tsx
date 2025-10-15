@@ -81,13 +81,13 @@ export default function MomentumPage() {
           </CardHeader>
         </Card>
 
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="border-purple-200 bg-purple-50">
           <CardHeader className="pb-3">
             <CardDescription className="flex items-center gap-1">
               <TrendingDown className="h-3 w-3" />
               하락 추세
             </CardDescription>
-            <CardTitle className="text-2xl text-blue-600">{stats.down}개</CardTitle>
+            <CardTitle className="text-2xl text-purple-600">{stats.down}개</CardTitle>
           </CardHeader>
         </Card>
 
@@ -123,7 +123,7 @@ export default function MomentumPage() {
                     item.trend === 'up'
                       ? 'border-red-100 hover:border-red-200'
                       : item.trend === 'down'
-                      ? 'border-blue-100 hover:border-blue-200'
+                      ? 'border-purple-100 hover:border-purple-200'
                       : 'hover:border-gray-200'
                   }`}
                 >
@@ -164,7 +164,7 @@ export default function MomentumPage() {
                             item.recent_change_percent > 0
                               ? 'text-red-600'
                               : item.recent_change_percent < 0
-                              ? 'text-blue-600'
+                              ? 'text-purple-600'
                               : 'text-gray-600'
                           }`}
                         >
@@ -193,7 +193,7 @@ export default function MomentumPage() {
                             item.trend === 'up'
                               ? 'bg-red-500'
                               : item.trend === 'down'
-                              ? 'bg-blue-500'
+                              ? 'bg-purple-500'
                               : 'bg-gray-400'
                           }`}
                           style={{
