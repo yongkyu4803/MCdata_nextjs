@@ -2,13 +2,16 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, Info, TrendingUp, DollarSign, Zap, Shield, BarChart3, PieChart, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { Info, TrendingUp, DollarSign, Zap, Shield, BarChart3, PieChart, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface GuideSection {
   title: string;
@@ -26,7 +29,7 @@ interface GuideSection {
 
 const guideSections: GuideSection[] = [
   {
-    title: '⚡ 즉시 체결',
+    title: '즉시 체결',
     icon: <Zap className="h-5 w-5" />,
     badge: '단기 매매',
     badgeColor: 'bg-yellow-500',
@@ -45,7 +48,7 @@ const guideSections: GuideSection[] = [
     useCase: '급하게 매수/매도가 필요하거나, 시장가로 거래하고 싶을 때',
   },
   {
-    title: '💹 가격 모멘텀',
+    title: '가격 모멘텀',
     icon: <TrendingUp className="h-5 w-5" />,
     badge: '추세 분석',
     badgeColor: 'bg-purple-500',
@@ -68,7 +71,7 @@ const guideSections: GuideSection[] = [
     useCase: '트렌드를 따라가거나 역추세 투자 전략을 세울 때',
   },
   {
-    title: '💰 고수익률 Top 10',
+    title: '고수익률 Top 10',
     icon: <DollarSign className="h-5 w-5" />,
     badge: '수익 중심',
     badgeColor: 'bg-green-500',
@@ -91,7 +94,7 @@ const guideSections: GuideSection[] = [
     useCase: '수익률을 최우선으로 고려하는 투자자에게 적합',
   },
   {
-    title: '🔻 저평가 Top 10',
+    title: '저평가 Top 10',
     icon: <TrendingUp className="h-5 w-5 rotate-180" />,
     badge: '가치 투자',
     badgeColor: 'bg-emerald-500',
@@ -114,7 +117,7 @@ const guideSections: GuideSection[] = [
     useCase: '장기 투자 관점에서 저가 매수 기회를 찾을 때',
   },
   {
-    title: '🌊 고유동성 Top 10',
+    title: '고유동성 Top 10',
     icon: <BarChart3 className="h-5 w-5" />,
     badge: '안정성',
     badgeColor: 'bg-cyan-500',
@@ -137,7 +140,7 @@ const guideSections: GuideSection[] = [
     useCase: '리스크를 최소화하고 안정적으로 운용하고 싶을 때',
   },
   {
-    title: '🎯 가치 투자 기회',
+    title: '가치 투자 기회',
     icon: <Shield className="h-5 w-5" />,
     badge: '종합 분석',
     badgeColor: 'bg-purple-500',
@@ -160,7 +163,7 @@ const guideSections: GuideSection[] = [
     useCase: '공격적 투자와 안정성을 동시에 추구할 때',
   },
   {
-    title: '📊 카테고리 분석',
+    title: '카테고리 분석',
     icon: <PieChart className="h-5 w-5" />,
     badge: '장르별',
     badgeColor: 'bg-orange-500',
@@ -179,7 +182,7 @@ const guideSections: GuideSection[] = [
     useCase: '포트폴리오를 다양한 장르로 분산하거나, 특정 장르에 집중 투자할 때',
   },
   {
-    title: '⏰ 시간 패턴',
+    title: '시간 패턴',
     icon: <Clock className="h-5 w-5" />,
     badge: '시계열',
     badgeColor: 'bg-pink-500',
@@ -197,141 +200,102 @@ const guideSections: GuideSection[] = [
     ],
     useCase: '최적의 거래 타이밍을 잡고 싶을 때',
   },
-  {
-    title: '📋 전체 데이터',
-    icon: <Info className="h-5 w-5" />,
-    badge: '전체 보기',
-    badgeColor: 'bg-gray-500',
-    description: '모든 주문 데이터를 한눈에 보고, 직접 필터링하고 정렬할 수 있습니다.',
-    metrics: [
-      {
-        label: '자유로운 탐색',
-        explanation: '모든 데이터에 접근하여 나만의 기준으로 종목을 선별할 수 있습니다.',
-      },
-    ],
-    interpretation: [
-      '🔍 맞춤형 필터링으로 원하는 조건의 종목 검색',
-      '📊 다양한 정렬 기준 적용',
-      '💾 필요한 데이터만 CSV로 내보내기',
-    ],
-    useCase: '특정 조건에 맞는 종목을 직접 찾고 싶을 때',
-  },
 ];
 
 export function DashboardGuide() {
-  const [openSections, setOpenSections] = useState<Set<number>>(new Set());
-
-  const toggleSection = (index: number) => {
-    const newOpenSections = new Set(openSections);
-    if (newOpenSections.has(index)) {
-      newOpenSections.delete(index);
-    } else {
-      newOpenSections.add(index);
-    }
-    setOpenSections(newOpenSections);
-  };
-
-  const toggleAll = () => {
-    if (openSections.size === guideSections.length) {
-      setOpenSections(new Set());
-    } else {
-      setOpenSections(new Set(guideSections.map((_, i) => i)));
-    }
-  };
-
   return (
     <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white">
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="rounded-full bg-purple-500 p-2">
-              <Info className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <CardTitle className="text-xl">📖 대시보드 가이드</CardTitle>
-              <CardDescription className="mt-1">
-                각 분석 탭의 의미와 활용법을 확인하세요
-              </CardDescription>
-            </div>
+        <div className="flex items-center gap-3">
+          <div className="rounded-full bg-purple-500 p-2">
+            <Info className="h-5 w-5 text-white" />
           </div>
-          <button
-            onClick={toggleAll}
-            className="text-sm text-purple-600 hover:text-purple-800 font-medium"
-          >
-            {openSections.size === guideSections.length ? '모두 접기' : '모두 펼치기'}
-          </button>
+          <div>
+            <CardTitle className="text-xl">대시보드 가이드</CardTitle>
+            <CardDescription className="mt-1">
+              각 분석 탭을 클릭하여 자세한 설명을 확인하세요
+            </CardDescription>
+          </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3">
-        {guideSections.map((section, index) => (
-          <Collapsible
-            key={index}
-            open={openSections.has(index)}
-            onOpenChange={() => toggleSection(index)}
-          >
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between rounded-lg border bg-white p-4 hover:bg-gray-50 transition-colors">
-                <div className="flex items-center gap-3">
+      <CardContent>
+        {/* 버튼 그리드 */}
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {guideSections.map((section, index) => (
+            <Dialog key={index}>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="h-auto flex items-center justify-between gap-3 p-4 hover:shadow-md transition-all"
+                >
                   <div className="flex items-center gap-2">
                     {section.icon}
-                    <span className="font-semibold text-left">{section.title}</span>
+                    <span className="font-semibold text-sm">{section.title}</span>
                   </div>
-                  <Badge className={`${section.badgeColor} text-white`}>
+                  <Badge className={`${section.badgeColor} text-white text-xs shrink-0`}>
                     {section.badge}
                   </Badge>
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 text-gray-500 transition-transform ${
-                    openSections.has(index) ? 'rotate-180' : ''
-                  }`}
-                />
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="mt-2 rounded-lg border bg-white p-5 space-y-4">
-                {/* 설명 */}
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">📌 개요</h4>
-                  <p className="text-sm text-gray-700">{section.description}</p>
-                </div>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-2 text-xl">
+                    {section.icon}
+                    {section.title}
+                  </DialogTitle>
+                  <DialogDescription className="text-base pt-2">
+                    {section.description}
+                  </DialogDescription>
+                </DialogHeader>
 
-                {/* 지표 설명 */}
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">📊 핵심 지표</h4>
-                  <div className="space-y-2">
-                    {section.metrics.map((metric, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded p-3">
-                        <p className="text-sm font-medium text-gray-900">{metric.label}</p>
-                        <p className="text-sm text-gray-600 mt-1">{metric.explanation}</p>
-                      </div>
-                    ))}
+                <div className="space-y-6 pt-4">
+                  {/* 핵심 지표 */}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <span className="text-lg">📊</span>
+                      핵심 지표
+                    </h4>
+                    <div className="space-y-3">
+                      {section.metrics.map((metric, idx) => (
+                        <div key={idx} className="bg-gray-50 rounded-lg p-4 border">
+                          <p className="font-medium text-gray-900 mb-1">{metric.label}</p>
+                          <p className="text-sm text-gray-600">{metric.explanation}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 해석 가이드 */}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <span className="text-lg">💡</span>
+                      해석 가이드
+                    </h4>
+                    <ul className="space-y-2">
+                      {section.interpretation.map((item, idx) => (
+                        <li key={idx} className="text-sm text-gray-700 flex items-start gap-2 bg-white rounded-lg p-3 border">
+                          <span className="text-purple-500 mt-0.5 font-bold">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* 활용 사례 */}
+                  <div className="bg-purple-50 rounded-lg p-4 border-2 border-purple-200">
+                    <h4 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                      <span className="text-lg">🎯</span>
+                      이럴 때 활용하세요
+                    </h4>
+                    <p className="text-sm text-purple-800">{section.useCase}</p>
                   </div>
                 </div>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </div>
 
-                {/* 해석 방법 */}
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">💡 해석 가이드</h4>
-                  <ul className="space-y-1">
-                    {section.interpretation.map((item, idx) => (
-                      <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                        <span className="text-purple-500 mt-0.5">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* 활용 사례 */}
-                <div className="bg-purple-50 rounded-lg p-3 border border-purple-200">
-                  <h4 className="font-medium text-purple-900 mb-1 text-sm">🎯 이럴 때 활용하세요</h4>
-                  <p className="text-sm text-purple-800">{section.useCase}</p>
-                </div>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-        ))}
-
-        {/* 하단 팁 */}
+        {/* 하단 투자 팁 */}
         <div className="mt-6 rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-4">
           <div className="flex items-start gap-3">
             <div className="rounded-full bg-amber-500 p-1.5 mt-0.5">
