@@ -19,9 +19,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 interface Props {
   orders: OrderWithMetrics[];
   pageSize?: number;
+  compact?: boolean;
 }
 
-export function OrdersTable({ orders, pageSize = 20 }: Props) {
+export function OrdersTable({ orders, pageSize = 20, compact = false }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortKey, setSortKey] = useState<keyof OrderWithMetrics | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -63,8 +64,19 @@ export function OrdersTable({ orders, pageSize = 20 }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border overflow-x-auto">
+        <Table className="table-fixed">
+          <colgroup>
+            <col style={{ width: '20%' }} />
+            <col style={{ width: '15%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '11%' }} />
+            <col style={{ width: '11%' }} />
+            <col style={{ width: '10%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '10%' }} />
+            <col style={{ width: '12%' }} />
+          </colgroup>
           <TableHeader>
             <TableRow>
               <TableHead onClick={() => handleSort('song_name')} className="cursor-pointer">
@@ -99,20 +111,20 @@ export function OrdersTable({ orders, pageSize = 20 }: Props) {
           <TableBody>
             {currentOrders.map((order, index) => (
               <TableRow key={`${order.order_id}-${index}`}>
-                <TableCell className="font-medium">{order.song_name}</TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell className={`font-medium truncate ${compact ? 'py-2.5' : ''}`}>{order.song_name}</TableCell>
+                <TableCell className={`text-muted-foreground truncate ${compact ? 'py-2.5' : ''}`}>
                   {order.song_artist}
                 </TableCell>
-                <TableCell>
+                <TableCell className={compact ? 'py-2.5' : ''}>
                   <Badge variant={order.order_type === '구매' ? 'default' : 'secondary'}>
                     {order.order_type}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className={`text-right ${compact ? 'py-2.5' : ''}`}>
                   {formatCurrency(order.order_price)}
                 </TableCell>
                 <TableCell
-                  className={`text-right font-mono ${
+                  className={`text-right font-mono ${compact ? 'py-2.5' : ''} ${
                     order.spread_rate > 0
                       ? 'text-red-600'
                       : order.spread_rate < 0
@@ -122,13 +134,13 @@ export function OrdersTable({ orders, pageSize = 20 }: Props) {
                 >
                   {formatPercent(order.spread_rate)}
                 </TableCell>
-                <TableCell className="text-right font-mono">
+                <TableCell className={`text-right font-mono ${compact ? 'py-2.5' : ''}`}>
                   {formatPercent(order.expected_yield)}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className={`text-right ${compact ? 'py-2.5' : ''}`}>
                   {order.liquidity_score?.toFixed(1) ?? '0.0'}
                 </TableCell>
-                <TableCell>
+                <TableCell className={compact ? 'py-2.5' : ''}>
                   <Badge
                     variant="outline"
                     style={{
@@ -139,7 +151,7 @@ export function OrdersTable({ orders, pageSize = 20 }: Props) {
                     {order.signal}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell className={`text-muted-foreground ${compact ? 'py-2.5' : ''}`}>
                   {formatDate(order.order_date, 'MM-dd HH:mm')}
                 </TableCell>
               </TableRow>

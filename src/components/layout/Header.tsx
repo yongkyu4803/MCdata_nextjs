@@ -19,28 +19,38 @@ export function Header() {
   };
 
   return (
-    <header className="border-b bg-background">
-      <div className="flex h-16 items-center justify-between px-6">
-        <div>
-          <h1 className="text-2xl font-bold">🎵 뮤직카우 시장 분석</h1>
-          <p className="text-sm text-muted-foreground">
-            실시간 음악 저작권 거래 데이터 분석
+    <header className="border-b bg-gradient-to-r from-purple-50 via-white to-purple-50 shadow-sm">
+      <div className="flex py-8 items-center justify-between px-8">
+        {/* 왼쪽 여백 */}
+        <div className="flex-1" />
+
+        {/* 중앙 제목 */}
+        <div className="flex-1 text-center">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
+            Musicow Market Analytics
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Real-time Music Copyright Trading Data Analysis
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">
-            마지막 업데이트: {formatDate(new Date())}
-          </span>
+
+        {/* 오른쪽 업데이트 정보 */}
+        <div className="flex flex-1 items-center justify-end gap-4">
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-muted-foreground">Last Updated</span>
+            <span className="text-sm font-medium">{formatDate(new Date(), 'MM-dd HH:mm')}</span>
+          </div>
           <Button
             onClick={handleRefresh}
             disabled={isRefreshing}
             variant="outline"
             size="sm"
+            className="shadow-sm hover:shadow-md transition-shadow"
           >
             <RefreshCw
               className={`mr-2 h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`}
             />
-            새로고침
+            Refresh
           </Button>
         </div>
       </div>
