@@ -38,11 +38,11 @@ export function SpreadDistribution({ data }: Props) {
     ).length,
   }));
 
-  const getBarColor = (value: number) => {
-    if (value > 50) return CHART_COLORS.SUCCESS;
-    if (value > 20) return CHART_COLORS.PRIMARY;
-    if (value > 10) return CHART_COLORS.WARNING;
-    return CHART_COLORS.NEUTRAL;
+  const getBarGradient = (value: number) => {
+    if (value > 50) return 'url(#gradientSuccess)';
+    if (value > 20) return 'url(#gradientPrimary)';
+    if (value > 10) return 'url(#gradientWarning)';
+    return 'url(#gradientNeutral)';
   };
 
   return (
@@ -53,6 +53,24 @@ export function SpreadDistribution({ data }: Props) {
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
+            <defs>
+              <linearGradient id="gradientSuccess" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.SUCCESS} stopOpacity={1} />
+                <stop offset="100%" stopColor={CHART_COLORS.SUCCESS} stopOpacity={0.6} />
+              </linearGradient>
+              <linearGradient id="gradientPrimary" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.PRIMARY} stopOpacity={1} />
+                <stop offset="100%" stopColor={CHART_COLORS.PRIMARY} stopOpacity={0.6} />
+              </linearGradient>
+              <linearGradient id="gradientWarning" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.WARNING} stopOpacity={1} />
+                <stop offset="100%" stopColor={CHART_COLORS.WARNING} stopOpacity={0.6} />
+              </linearGradient>
+              <linearGradient id="gradientNeutral" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.NEUTRAL} stopOpacity={1} />
+                <stop offset="100%" stopColor={CHART_COLORS.NEUTRAL} stopOpacity={0.6} />
+              </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="range"
@@ -65,7 +83,7 @@ export function SpreadDistribution({ data }: Props) {
             <Tooltip />
             <Bar dataKey="count" radius={[8, 8, 0, 0]}>
               {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={getBarColor(entry.count)} />
+                <Cell key={`cell-${index}`} fill={getBarGradient(entry.count)} />
               ))}
             </Bar>
           </BarChart>
