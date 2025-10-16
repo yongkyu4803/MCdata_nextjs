@@ -21,7 +21,8 @@ export function Header() {
 
   return (
     <header className="border-b bg-gradient-to-r from-purple-50 via-white to-purple-50 shadow-sm">
-      <div className="flex py-8 items-center justify-between px-8">
+      {/* 데스크톱 헤더 */}
+      <div className="hidden md:flex py-8 items-center justify-between px-8">
         {/* 왼쪽 Home 버튼 */}
         <div className="flex-1">
           <Link href="/">
@@ -64,6 +65,45 @@ export function Header() {
             />
             Refresh
           </Button>
+        </div>
+      </div>
+
+      {/* 모바일 헤더 */}
+      <div className="md:hidden py-4 px-4">
+        {/* 상단: 제목 + Refresh 버튼 */}
+        <div className="flex items-center justify-between mb-3">
+          <h1 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
+            Musicow Analytics
+          </h1>
+          <Button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            variant="outline"
+            size="sm"
+            className="shadow-sm"
+          >
+            <RefreshCw
+              className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`}
+            />
+          </Button>
+        </div>
+
+        {/* 하단: Home 버튼 + 업데이트 시간 */}
+        <div className="flex items-center justify-between text-xs">
+          <Link href="/">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-7 bg-gradient-to-r from-purple-100 to-indigo-100 border-purple-200"
+            >
+              <Home className="mr-1.5 h-3 w-3" />
+              Home
+            </Button>
+          </Link>
+          <div className="text-right">
+            <span className="text-muted-foreground">Updated: </span>
+            <span className="font-medium">{formatDate(new Date(), 'MM-dd HH:mm')}</span>
+          </div>
         </div>
       </div>
     </header>
