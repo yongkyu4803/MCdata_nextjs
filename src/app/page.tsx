@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section with Video Background */}
-      <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden min-h-[600px]">
-        {/* 배경 비디오 */}
+      <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden min-h-[600px] bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600">
+        {/* 배경 비디오 (데스크톱) */}
         <HeroVideo videoSrc="/videos/002_Music_Investment_Human_Connection_Story.mp4" />
 
         {/* 콘텐츠 */}
