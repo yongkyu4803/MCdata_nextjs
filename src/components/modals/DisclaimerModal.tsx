@@ -38,20 +38,20 @@ export function DisclaimerModal() {
       <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl text-amber-900">
-            <AlertTriangle className="h-6 w-6 text-amber-600" />
+            <AlertTriangle className="h-4 w-5 text-amber-600" />
             투자 관련 안내 및 면책공고
           </DialogTitle>
-          <DialogDescription className="text-base pt-2">
+          <DialogDescription className="text-base pt-1">
             본 사이트 이용 전 반드시 아래 내용을 확인하시기 바랍니다.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 mt-4">
+        <div className="space-y-1 mt-1">
           {/* 관리자 공지사항 */}
-          <div className="bg-blue-50 dark:bg-blue-950 rounded-lg border-2 border-blue-200 dark:border-blue-800 p-5">
-            <h3 className="font-bold text-lg text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2">
+          <div className="bg-blue-50 dark:bg-blue-950 rounded-lg border-2 border-blue-200 dark:border-blue-800 p-3">
+            <h4 className="font-bold text-lg text-blue-900 dark:text-blue-100 mb-2 flex items-center gap-2">
               📢 관리자 공지사항
-            </h3>
+            </h4>
             <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
               본 사이트는 뮤직카우에서 제공하는 거래정보를 기반으로 분석되었습니다. <strong>청약 또는 투자 권유를 목적으로 하지 않습니다.</strong> 또한 제공되는 정보에서 보여지는 종목들은 분석로직에 따라 정해지며, <strong>종목 추천을 위해 임의로 정보를 가공하지 않았습니다.</strong> 기타 자세한 안내는 아래 내용을 참고하시기 바랍니다.
             </p>
