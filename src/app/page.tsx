@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ArrowRight, BarChart3, TrendingUp, Zap } from 'lucide-react';
+import { ArrowRight, BarChart3, TrendingUp, Zap, ExternalLink } from 'lucide-react';
 import { HeroVideo } from '@/components/video/HeroVideo';
 
 export default function Home() {
@@ -28,11 +28,17 @@ export default function Home() {
           </h3>
           <div className="flex justify-center gap-4 pt-4">
             <Link href="/dashboard">
-              <Button size="lg" className="bg-white hover:bg-purple-50 text-purple-900 font-semibold shadow-2xl hover:shadow-3xl transition-all hover:scale-105">
+              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/50 hover:border-white font-semibold shadow-2xl hover:shadow-3xl transition-all hover:scale-105 backdrop-blur-sm">
                 대시보드 시작하기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
+            <a href="https://musicow.com" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/50 hover:border-white font-semibold shadow-2xl hover:shadow-3xl transition-all hover:scale-105 backdrop-blur-sm">
+                뮤직카우 바로가기
+                <ExternalLink className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>

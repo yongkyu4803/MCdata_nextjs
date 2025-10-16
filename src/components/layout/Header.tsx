@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils/format';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Home } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -21,8 +22,19 @@ export function Header() {
   return (
     <header className="border-b bg-gradient-to-r from-purple-50 via-white to-purple-50 shadow-sm">
       <div className="flex py-8 items-center justify-between px-8">
-        {/* 왼쪽 여백 */}
-        <div className="flex-1" />
+        {/* 왼쪽 Home 버튼 */}
+        <div className="flex-1">
+          <Link href="/">
+            <Button
+              variant="outline"
+              size="sm"
+              className="shadow-sm hover:shadow-md transition-all hover:scale-105 bg-gradient-to-r from-purple-100 to-indigo-100 hover:from-purple-200 hover:to-indigo-200 border-purple-200"
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Button>
+          </Link>
+        </div>
 
         {/* 중앙 제목 */}
         <div className="flex-1 text-center">
