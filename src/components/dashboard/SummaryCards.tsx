@@ -75,7 +75,7 @@ export function SummaryCards() {
       description: '스프레드 ±0.5% 이내',
     },
     {
-      title: '저평가 종목',
+      title: '낮은 호가 종목',
       value: formatNumber(summary.undervalued_count),
       icon: TrendingDown,
       description: '스프레드 -5% 이하',

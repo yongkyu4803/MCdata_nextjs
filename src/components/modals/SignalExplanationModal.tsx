@@ -18,7 +18,7 @@ interface SignalInfo {
   color: string;
   description: string;
   condition: string;
-  investmentTip: string;
+  characteristic: string;
   priority: number;
 }
 
@@ -28,15 +28,15 @@ const SIGNAL_EXPLANATIONS: SignalInfo[] = [
     color: SIGNAL_COLORS['저평가'],
     description: '시장가보다 할인된 가격에 거래되는 주문',
     condition: `스프레드율 < ${THRESHOLDS.SPREAD_RATE.LOW}% AND 유동성 > ${THRESHOLDS.LIQUIDITY_SCORE.MEDIUM}`,
-    investmentTip: '💰 매수 기회: 시장가보다 저렴하게 구매 가능',
+    characteristic: '📊 특징: 시장가보다 낮은 가격',
     priority: 1,
   },
   {
     name: '유동성↑',
     color: SIGNAL_COLORS['유동성↑'],
-    description: '매수/매도 주문이 활발한 고유동성 종목',
+    description: '거래 주문이 활발한 고유동성 종목',
     condition: `유동성 점수 > ${THRESHOLDS.LIQUIDITY_SCORE.HIGH}`,
-    investmentTip: '✅ 안정적: 쉽게 사고 팔 수 있는 종목',
+    characteristic: '✅ 특징: 거래가 활발한 종목',
     priority: 2,
   },
   {
@@ -44,15 +44,15 @@ const SIGNAL_EXPLANATIONS: SignalInfo[] = [
     color: SIGNAL_COLORS['보통'],
     description: '특별한 이슈가 없는 일반적인 주문',
     condition: '다른 시그널 조건에 해당하지 않음',
-    investmentTip: '📊 중립: 다른 지표를 함께 고려',
+    characteristic: '📊 특징: 중립적 상태',
     priority: 3,
   },
   {
     name: '유동성↓',
     color: SIGNAL_COLORS['유동성↓'],
-    description: '매수/매도 주문이 적은 저유동성 종목',
+    description: '거래 주문이 적은 저유동성 종목',
     condition: `유동성 점수 < ${THRESHOLDS.LIQUIDITY_SCORE.LOW}`,
-    investmentTip: '⚠️ 주의: 체결이 어려울 수 있음',
+    characteristic: '⚠️ 특징: 체결이 어려울 수 있음',
     priority: 4,
   },
   {
@@ -60,7 +60,7 @@ const SIGNAL_EXPLANATIONS: SignalInfo[] = [
     color: SIGNAL_COLORS['고평가'],
     description: '시장가보다 프리미엄이 붙은 주문',
     condition: `스프레드율 > ${THRESHOLDS.SPREAD_RATE.HIGH}% AND 유동성 > ${THRESHOLDS.LIQUIDITY_SCORE.MEDIUM}`,
-    investmentTip: '🚫 비추천: 시장가보다 비싼 가격',
+    characteristic: '📊 특징: 시장가보다 높은 가격',
     priority: 5,
   },
   {
@@ -68,7 +68,7 @@ const SIGNAL_EXPLANATIONS: SignalInfo[] = [
     color: SIGNAL_COLORS['주의'],
     description: '비정상적인 가격이나 데이터 이상',
     condition: '스프레드율 > 20% OR 가격 ≤ 0',
-    investmentTip: '🚨 위험: 거래 전 확인 필요',
+    characteristic: '🚨 특징: 거래 전 확인 필요',
     priority: 6,
   },
 ];
@@ -84,9 +84,9 @@ export function SignalExplanationModal() {
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>🎯 투자 시그널 설명</DialogTitle>
+          <DialogTitle>🎯 데이터 시그널 설명</DialogTitle>
           <DialogDescription>
-            각 시그널의 의미와 투자 판단 기준을 안내합니다
+            각 시그널의 의미와 발생 조건을 안내합니다
           </DialogDescription>
         </DialogHeader>
 
@@ -115,19 +115,19 @@ export function SignalExplanationModal() {
               </div>
 
               <div className="flex items-start gap-2 bg-secondary/30 rounded p-3">
-                <span className="text-base font-medium">{signal.investmentTip}</span>
+                <span className="text-base font-medium">{signal.characteristic}</span>
               </div>
             </div>
           ))}
         </div>
 
         <div className="mt-6 p-5 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
-          <h4 className="font-semibold text-base mb-3">📌 시그널 활용 팁</h4>
+          <h4 className="font-semibold text-base mb-3">📌 시그널 분석 가이드</h4>
           <ul className="text-base space-y-2 text-muted-foreground">
-            <li>• <strong>저평가</strong> 시그널은 매수 기회로 활용</li>
-            <li>• <strong>유동성↑</strong>는 안정적인 거래 가능</li>
-            <li>• <strong>고평가</strong>와 <strong>주의</strong>는 신중한 판단 필요</li>
-            <li>• 시그널과 함께 <strong>수익률 이점</strong>, <strong>스프레드율</strong>을 종합적으로 고려</li>
+            <li>• <strong>낮은 호가</strong>: 시장가 대비 낮은 가격 조건</li>
+            <li>• <strong>유동성↑</strong>: 활발한 거래 조건</li>
+            <li>• <strong>고평가</strong>와 <strong>주의</strong>: 데이터 확인 필요</li>
+            <li>• 시그널과 함께 <strong>수익률 이점</strong>, <strong>스프레드율</strong> 등 복합 지표 확인 권장</li>
           </ul>
         </div>
       </DialogContent>

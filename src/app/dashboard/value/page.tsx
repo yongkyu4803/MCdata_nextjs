@@ -9,7 +9,7 @@ import { THRESHOLDS } from '@/lib/constants';
 export default function ValuePage() {
   const { data: orders, isLoading, error } = useOrders();
 
-  // 가치 투자 기회: 저평가 + 고유동성 + 고수익률
+  // 가치 분석 필터: 낮은 호가 + 고유동성 + 높은 수익률
   const valueOpportunities = orders
     ?.filter(
       (order) =>
@@ -42,9 +42,9 @@ export default function ValuePage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>💎 가치 투자 기회</CardTitle>
+          <CardTitle>💎 가치 분석 필터</CardTitle>
           <CardDescription>
-            저평가 + 중간 이상 유동성 + 중간 이상 수익률 조합
+            낮은 호가 + 중간 이상 유동성 + 중간 이상 수익률 조건
             ({valueOpportunities.length}개)
           </CardDescription>
         </CardHeader>
@@ -53,7 +53,7 @@ export default function ValuePage() {
             <OrdersTable orders={valueOpportunities} />
           ) : (
             <p className="py-8 text-center text-muted-foreground">
-              가치 투자 기회가 없습니다.
+              해당 조건을 만족하는 종목이 없습니다.
             </p>
           )}
         </CardContent>

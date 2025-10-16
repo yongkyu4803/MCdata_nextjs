@@ -33,12 +33,12 @@ const navigation = [
     icon: TrendingUp,
   },
   {
-    name: '고수익률',
+    name: '주문가 대비 수익률',
     href: '/dashboard/yield',
     icon: DollarSign,
   },
   {
-    name: '저평가',
+    name: '낮은 호가',
     href: '/dashboard/undervalued',
     icon: TrendingDown,
   },
@@ -48,7 +48,7 @@ const navigation = [
     icon: Droplets,
   },
   {
-    name: '가치 투자',
+    name: '가치 분석',
     href: '/dashboard/value',
     icon: Gem,
   },

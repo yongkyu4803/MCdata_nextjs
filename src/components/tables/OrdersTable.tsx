@@ -157,7 +157,7 @@ export function OrdersTable({ orders, pageSize = 20, compact = false }: Props) {
                       : 'text-muted-foreground'
                   }`}
                 >
-                  {order.yield_advantage > 0 ? '+' : ''}{formatPercent(order.yield_advantage)}
+                  {formatPercent(order.yield_advantage)}
                 </TableCell>
                 <TableCell className={`text-right ${compact ? 'py-2.5' : ''}`}>
                   {order.liquidity_score?.toFixed(1) ?? '0.0'}

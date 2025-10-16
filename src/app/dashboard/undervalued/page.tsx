@@ -9,7 +9,7 @@ import { THRESHOLDS } from '@/lib/constants';
 export default function UndervaluedPage() {
   const { data: orders, isLoading, error } = useOrders();
 
-  // 저평가 주문 Top 100 (스프레드율 낮은 순)
+  // 낮은 호가 주문 Top 100 (스프레드율 낮은 순)
   const undervaluedOrders = orders
     ?.filter((order) => order.spread_rate < THRESHOLDS.SPREAD_RATE.LOW)
     .sort((a, b) => a.spread_rate - b.spread_rate)
@@ -27,7 +27,7 @@ export default function UndervaluedPage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>📉 저평가 Top 100</CardTitle>
+          <CardTitle>📉 낮은 호가 Top 100</CardTitle>
           <CardDescription>
             스프레드율 {THRESHOLDS.SPREAD_RATE.LOW}% 이하의 주문
             ({undervaluedOrders.length}개)
@@ -38,7 +38,7 @@ export default function UndervaluedPage() {
             <OrdersTable orders={undervaluedOrders} pageSize={20} compact />
           ) : (
             <p className="py-8 text-center text-muted-foreground">
-              저평가 주문이 없습니다.
+              해당 조건을 만족하는 주문이 없습니다.
             </p>
           )}
         </CardContent>

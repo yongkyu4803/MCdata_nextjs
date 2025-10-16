@@ -9,7 +9,7 @@ import { THRESHOLDS } from '@/lib/constants';
 export default function YieldPage() {
   const { data: orders, isLoading, error } = useOrders();
 
-  // 고수익률 주문 Top 100
+  // 수익률 상위 주문 Top 100
   // 정렬 우선순위: 1) yield_advantage (수익률 이점), 2) expected_yield (실제 수익률)
   const highYieldOrders = orders
     ?.filter((order) => order.expected_yield >= THRESHOLDS.EXPECTED_YIELD.HIGH)
@@ -35,7 +35,7 @@ export default function YieldPage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>💰 고수익률 Top 100</CardTitle>
+          <CardTitle>💰 수익률 상위 Top 100</CardTitle>
           <CardDescription>
             예상 수익률 {THRESHOLDS.EXPECTED_YIELD.HIGH}% 이상의 주문
             ({highYieldOrders.length}개)
@@ -50,7 +50,7 @@ export default function YieldPage() {
             <OrdersTable orders={highYieldOrders} pageSize={20} compact />
           ) : (
             <p className="py-8 text-center text-muted-foreground">
-              고수익률 주문이 없습니다.
+              해당 조건을 만족하는 주문이 없습니다.
             </p>
           )}
         </CardContent>
