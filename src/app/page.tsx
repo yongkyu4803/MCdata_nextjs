@@ -8,22 +8,27 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { ArrowRight, BarChart3, TrendingUp, Zap } from 'lucide-react';
+import { HeroVideo } from '@/components/video/HeroVideo';
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
-      {/* Hero Section */}
-      <section className="flex flex-1 flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-purple-100 py-16 px-24">
-        <div className="max-w-4xl space-y-3 text-center">
-          <h1 className="text-6xl font-bold tracking-tight bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
+      {/* Hero Section with Video Background */}
+      <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden min-h-[600px]">
+        {/* 배경 비디오 */}
+        <HeroVideo videoSrc="/videos/002_Music_Investment_Human_Connection_Story.mp4" />
+
+        {/* 콘텐츠 */}
+        <div className="relative z-10 max-w-4xl space-y-6 text-center px-4">
+          <h1 className="text-6xl font-bold tracking-tight text-white drop-shadow-2xl animate-fade-in">
             Musicow Market Analytics
           </h1>
-          <h3 className="text-lg text-muted-foreground">
+          <h3 className="text-xl text-white/90 drop-shadow-lg">
             실시간 음악 저작권 거래 데이터를 분석하고 투자 기회를 발견하세요
           </h3>
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4 pt-4">
             <Link href="/dashboard">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" className="bg-white hover:bg-purple-50 text-purple-900 font-semibold shadow-2xl hover:shadow-3xl transition-all hover:scale-105">
                 대시보드 시작하기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -100,22 +105,22 @@ export default function Home() {
       </section>
 
       {/* CTA Section - Footer Style */}
-      <section className="border-t bg-gradient-to-br from-purple-950 via-purple-900 to-indigo-950 py-20">
-        <div className="container mx-auto max-w-2xl px-4 text-center">
-          <h2 className="mb-6 text-4xl font-bold text-white drop-shadow-lg">
+      <section className="border-t bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 py-6">
+        <div className="container mx-auto max-w-xl px-4 text-center">
+          <h2 className="mb-3 text-2xl font-bold text-white drop-shadow-lg">
             데이터 기반의 현명한 투자 결정을 내리세요
           </h2>
-          <p className="mb-8 text-lg text-purple-200">
-            지금 바로 시작하여 투자 기회를 발견하세요
-          </p>
           <Link href="/dashboard">
-            <Button size="lg" className="bg-white hover:bg-purple-50 text-purple-900 font-semibold shadow-xl hover:shadow-2xl transition-all border-2 border-white hover:scale-105">
+            <Button
+              size="sm"
+              className="bg-white hover:bg-purple-50 text-purple-900 font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+            >
               지금 시작하세요
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <div className="mt-12 pt-8 border-t border-purple-700/50">
-            <p className="text-sm text-purple-300">
+          <div className="mt-6 pt-4 border-t border-white/20">
+            <p className="text-xs text-white/70">
               © 2025 Musicow Dashboard | Made by GQAI
             </p>
           </div>
