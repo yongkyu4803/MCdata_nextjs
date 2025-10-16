@@ -62,7 +62,7 @@ export function DisclaimerModal() {
             <h3 className="font-bold text-lg text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-2">
               ⚠️ 뮤직카우 투자관련 안내문
             </h3>
-            <ul className="space-y-3 text-sm text-amber-900 dark:text-amber-100">
+            <ul className="space-y-1 text-sm text-amber-900 dark:text-amber-100">
               <li className="flex items-start gap-2">
                 <span className="text-amber-600 dark:text-amber-400 font-bold mt-0.5">•</span>
                 <span>본 안내는 <strong>청약 또는 투자 권유를 목적으로 하지 않으며</strong>, 청약 또는 투자의 권유는 (예비, 간이)투자설명서에 따릅니다.</span>
