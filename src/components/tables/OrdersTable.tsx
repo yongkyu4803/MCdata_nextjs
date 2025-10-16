@@ -67,15 +67,17 @@ export function OrdersTable({ orders, pageSize = 20, compact = false }: Props) {
       <div className="rounded-md border overflow-x-auto">
         <Table className="table-fixed">
           <colgroup>
-            <col style={{ width: '20%' }} />
-            <col style={{ width: '15%' }} />
+            <col style={{ width: '18%' }} />
+            <col style={{ width: '13%' }} />
+            <col style={{ width: '7%' }} />
+            <col style={{ width: '9%' }} />
             <col style={{ width: '8%' }} />
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '10%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '7%' }} />
             <col style={{ width: '8%' }} />
             <col style={{ width: '10%' }} />
-            <col style={{ width: '12%' }} />
           </colgroup>
           <TableHeader>
             <TableRow>
@@ -94,8 +96,14 @@ export function OrdersTable({ orders, pageSize = 20, compact = false }: Props) {
               <TableHead onClick={() => handleSort('spread_rate')} className="cursor-pointer text-right">
                 스프레드율
               </TableHead>
+              <TableHead onClick={() => handleSort('base_yield')} className="cursor-pointer text-right">
+                기준율
+              </TableHead>
               <TableHead onClick={() => handleSort('expected_yield')} className="cursor-pointer text-right">
-                수익률
+                주문가율
+              </TableHead>
+              <TableHead onClick={() => handleSort('yield_advantage')} className="cursor-pointer text-right">
+                이점
               </TableHead>
               <TableHead onClick={() => handleSort('liquidity_score')} className="cursor-pointer text-right">
                 유동성
@@ -134,8 +142,22 @@ export function OrdersTable({ orders, pageSize = 20, compact = false }: Props) {
                 >
                   {formatPercent(order.spread_rate)}
                 </TableCell>
+                <TableCell className={`text-right font-mono text-muted-foreground ${compact ? 'py-2.5' : ''}`}>
+                  {formatPercent(order.base_yield)}
+                </TableCell>
                 <TableCell className={`text-right font-mono ${compact ? 'py-2.5' : ''}`}>
                   {formatPercent(order.expected_yield)}
+                </TableCell>
+                <TableCell
+                  className={`text-right font-mono font-semibold ${compact ? 'py-2.5' : ''} ${
+                    order.yield_advantage > 0
+                      ? 'text-green-600'
+                      : order.yield_advantage < 0
+                      ? 'text-red-600'
+                      : 'text-muted-foreground'
+                  }`}
+                >
+                  {order.yield_advantage > 0 ? '+' : ''}{formatPercent(order.yield_advantage)}
                 </TableCell>
                 <TableCell className={`text-right ${compact ? 'py-2.5' : ''}`}>
                   {order.liquidity_score?.toFixed(1) ?? '0.0'}

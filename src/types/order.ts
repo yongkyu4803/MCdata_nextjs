@@ -30,7 +30,9 @@ export interface Order {
 
 export interface OrderMetrics {
   spread_rate: number;        // 스프레드율 (%)
-  expected_yield: number;      // 예상 수익률 (%)
+  base_yield: number;          // 기준 수익률 (시장가 기준, %)
+  expected_yield: number;      // 주문가 대비 수익률 (주문가 기준, %)
+  yield_advantage: number;     // 수익률 이점 (주문가율 - 기준율, %)
   liquidity_score: number;     // 유동성 점수 (0-100)
   signal: Signal;              // 시그널 분류
   momentum_score?: number;     // 모멘텀 점수 (옵션)

@@ -57,10 +57,10 @@ export function SummaryCards() {
       description: '가격 차이 비율',
     },
     {
-      title: '평균 수익률',
+      title: '평균 주문가 수익률',
       value: formatPercent(summary.avg_expected_yield, 2),
       icon: DollarSign,
-      description: '예상 연 수익률',
+      description: '주문가 기준 수익률 평균',
     },
     {
       title: '평균 유동성',

@@ -5,6 +5,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 import { OrderWithMetrics, Signal } from '@/types/order';
 import { SIGNAL_COLORS } from '@/lib/constants';
 import { formatNumber } from '@/lib/utils/format';
+import { SignalExplanationModal } from '@/components/modals/SignalExplanationModal';
 
 interface Props {
   data: OrderWithMetrics[];
@@ -29,7 +30,10 @@ export function SignalDistribution({ data }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>🎯 시그널 분포</CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle>🎯 시그널 분포</CardTitle>
+          <SignalExplanationModal />
+        </div>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>

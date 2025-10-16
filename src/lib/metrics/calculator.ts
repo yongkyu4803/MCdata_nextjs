@@ -22,7 +22,23 @@ export class MetricsCalculator {
   }
 
   /**
-   * 예상 수익률 계산
+   * 기준 수익률 계산 (시장가 기준)
+   * 공식: royalty_rate * 100
+   *
+   * 설명:
+   * - 최근 거래가로 매수했을 때 기대할 수 있는 연간 수익률
+   * - 모든 주문을 비교할 수 있는 기준점 제공
+   * - 저작권료율과 동일한 값 (정규화된 비교 기준)
+   *
+   * @param royaltyRate 저작권료율 (소수점, 예: 0.082)
+   * @returns 기준 수익률 (%)
+   */
+  calculateBaseYield(royaltyRate: number): number {
+    return royaltyRate * 100;
+  }
+
+  /**
+   * 주문가 대비 수익률 계산
    * 공식: (royalty_rate * recent_price) / order_price * 100
    *
    * 설명:
@@ -37,7 +53,7 @@ export class MetricsCalculator {
    * @param royaltyRate 저작권료율 (소수점, 예: 0.082)
    * @param recentPrice 최근 거래가
    * @param orderPrice 주문 가격
-   * @returns 예상 수익률 (%)
+   * @returns 주문가 대비 수익률 (%)
    */
   calculateExpectedYield(
     royaltyRate: number,
@@ -50,6 +66,26 @@ export class MetricsCalculator {
     // 연간 저작권 수익 = royalty_rate * recent_price
     // 수익률 = (연간 수익 / 투자금) * 100
     return ((royaltyRate * recentPrice) / orderPrice) * 100;
+  }
+
+  /**
+   * 수익률 이점 계산
+   * 공식: 주문가율 - 기준율
+   *
+   * 설명:
+   * - 시장가 대비 이 주문의 수익률이 얼마나 유리한지/불리한지
+   * - 양수: 할인된 가격으로 더 높은 수익률
+   * - 음수: 프리미엄 가격으로 더 낮은 수익률
+   *
+   * 예시: 주문가율=6.28%, 기준율=8.2% → -1.92% (불리)
+   * 예시: 주문가율=10.25%, 기준율=8.2% → +2.05% (유리)
+   *
+   * @param orderYield 주문가 대비 수익률
+   * @param baseYield 기준 수익률
+   * @returns 수익률 이점 (%)
+   */
+  calculateYieldAdvantage(orderYield: number, baseYield: number): number {
+    return orderYield - baseYield;
   }
 
   /**
@@ -241,10 +277,17 @@ export class MetricsCalculator {
         order.recent_price
       );
 
+      const baseYield = this.calculateBaseYield(order.order_royalty_rate);
+
       const expectedYield = this.calculateExpectedYield(
         order.order_royalty_rate,
         order.recent_price,
         order.order_price
+      );
+
+      const yieldAdvantage = this.calculateYieldAdvantage(
+        expectedYield,
+        baseYield
       );
 
       const liquidityScore = this.calculateLiquidityScore(order, orders);
@@ -254,7 +297,9 @@ export class MetricsCalculator {
       return {
         ...order,
         spread_rate: spreadRate,
+        base_yield: baseYield,
         expected_yield: expectedYield,
+        yield_advantage: yieldAdvantage,
         liquidity_score: liquidityScore,
         signal,
       };
